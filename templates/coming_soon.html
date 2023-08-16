@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coming Soon!</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #2f2f2f;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .container {
+    text-align: center;
+    color: #ffffff;
+  }
+  .header {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+  .subheader {
+    font-size: 24px;
+    margin-bottom: 40px;
+  }
+  .countdown {
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 20px;
+  }
+  .countdown-value {
+    font-size: 48px;
+  }
+  .countdown-label {
+    font-size: 18px;
+    margin-top: -10px;
+  }
+  .image {
+    max-width: 100%;
+    border-radius: 10px;
+  }
+  @media screen and (max-width: 768px) {
+    .header {
+      font-size: 36px;
+    }
+    .subheader {
+      font-size: 20px;
+    }
+    .countdown-value {
+      font-size: 36px;
+    }
+    .countdown-label {
+      font-size: 16px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">Coming Soon!</div>
+    <div class="subheader">Taskify is not yet done! Though it's coming soon!</div>
+    <div class="countdown">
+      <div class="countdown-item">
+        <div class="countdown-value" id="days">00</div>
+        <div class="countdown-label">Days</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-value" id="hours">00</div>
+        <div class="countdown-label">Hours</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-value" id="minutes">00</div>
+        <div class="countdown-label">Minutes</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-value" id="seconds">00</div>
+        <div class="countdown-label">Seconds</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Set the target date for the countdown (January 1, 2024)
+    const targetDate = new Date("2024-01-01T00:00:00");
+
+    // Update the countdown every second
+    const countdownInterval = setInterval(updateCountdown, 1000);
+
+    function updateCountdown() {
+      const currentDate = new Date();
+      const timeDifference = targetDate - currentDate;
+
+      const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+      document.getElementById("days").textContent = formatTime(days);
+      document.getElementById("hours").textContent = formatTime(hours);
+      document.getElementById("minutes").textContent = formatTime(minutes);
+      document.getElementById("seconds").textContent = formatTime(seconds);
+
+      if (timeDifference <= 0) {
+        clearInterval(countdownInterval);
+      }
+    }
+
+    function formatTime(time) {
+      return time < 10 ? `0${time}` : time;
+    }
+
+    updateCountdown(); // Update immediately upon page load
+  </script>
+</body>
+</html>
